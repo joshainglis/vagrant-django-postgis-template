@@ -26,9 +26,13 @@ export LC_ALL=en_GB.UTF-8
 # Install essential packages from Apt
 apt-get update -y
 # Python dev packages
-apt-get install -y build-essential python python-dev python-setuptools python-pip
-# Dependencies for image processing with PIL
-apt-get install -y libjpeg62-dev zlib1g-dev libfreetype6-dev liblcms1-dev
+apt-get install -y build-essential python python-dev
+# python-setuptools being installed manually
+wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py -O - | python
+# Dependencies for image processing with Pillow (drop-in replacement for PIL)
+# supporting: jpeg, tiff, png, freetype, littlecms
+# (pip install pillow to get pillow itself, it is not in requirements.txt)
+apt-get install -y libjpeg62-dev libtiff4-dev zlib1g-dev libfreetype6-dev liblcms2-dev
 # Git (we'd rather avoid people keeping credentials for git commits in the repo, but sometimes we need it for pip requirements that aren't in PyPI)
 apt-get install -y git
 
@@ -44,7 +48,7 @@ if ! command -v pip; then
     easy_install -U pip
 fi
 if [[ ! -f /usr/local/bin/virtualenv ]]; then
-    easy_install virtualenv virtualenvwrapper stevedore virtualenv-clone
+    pip install virtualenv virtualenvwrapper stevedore virtualenv-clone
 fi
 
 # bash environment global setup
