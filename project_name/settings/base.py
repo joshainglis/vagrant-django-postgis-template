@@ -19,7 +19,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': '{{ project_name }}',
         'USER': 'postgres',
         'PASSWORD': '',
@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis'
 
     'south',
     'devserver',
